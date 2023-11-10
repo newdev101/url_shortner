@@ -1,0 +1,77 @@
+<!-- basically it is a html file -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>URL SHORTENER</title>
+
+     <style>
+          body {
+               font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          }
+     </style>
+</head>
+
+<body>
+     <h1>URL SHORTENER</h1>
+
+     <% if (locals.id) { %>
+          <h4>URL generated: </h4>
+          <h3>redirect URL: http://localhost:8000/<%= id %>
+          </h3>
+      <% } %>
+     <% if (true) { %>
+          <form method="post" action='/url'>
+               <div>
+                    <label for="">please input your url</label> &nbsp;
+                    <input type="text" name="url" placeholder="https://www.google.com" required>
+               </div>
+               <div>
+                    <button type="submit">generate</button>
+               </div>
+               <hr>
+          </form>
+
+     <% } %>
+     
+     <% if (locals.urls) { %>
+          <div>
+               <table>
+                    <caption>all data</caption>
+                    <thead>
+                         <th>index</th>
+                         <th>shortId</th>
+                         <th>URL</th>
+                         <th>visits</th>
+                         <th>redirectURL</th>
+                    </thead>
+                    <tbody>
+                         <% urls.forEach((url,index)=> { %>
+                         <tr>
+                              <td>
+                                   <%= index+1 %>
+                              </td>
+                              <td>
+                                   <%= url.shortId %>
+                              </td>
+                              <td>
+                                   <%= url.redirectUrl %>
+                              </td>
+                              <td>
+                                   <%= url.visitHistory.length %>
+                              </td>
+                              <td>
+                                   http://localhost:8000/<%= url.shortId %>
+                              </td>
+                         </tr>
+                         <% }) %>
+                    </tbody>
+               </table>
+          </div>
+     <% } %>
+
+</body>
+
+</html>
